@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -11,585 +10,370 @@
             padding: 0;
             box-sizing: border-box;
         }
-
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
-        background: #f5f5f7;
-        min-height: 100vh;
-        color: #1d1d1f;
-        font-weight: 400;
-        line-height: 1.47059;
-        -webkit-font-smoothing: antialiased;
-    }
-
-
-
-    .container {
-        padding: 20px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .category-section {
-        margin-bottom: 30px;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .category-header {
-        padding: 15px 20px;
-        background: #007AFF;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        user-select: none;
-    }
-
-    .category-header::after {
-        content: '▼';
-        font-size: 12px;
-        transition: transform 0.3s ease;
-    }
-
-    .category-header.collapsed::after {
-        transform: rotate(-90deg);
-    }
-
-    .category-content {
-        max-height: 1000px;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
-
-    .category-content.collapsed {
-        max-height: 0;
-    }
-
-    .subcategory {
-        border-bottom: 0.5px solid #f0f0f0;
-    }
-
-    .subcategory:last-child {
-        border-bottom: none;
-    }
-
-    .subcategory-title {
-        padding: 12px 20px;
-        background: #f8f9fa;
-        font-size: 14px;
-        font-weight: 500;
-        color: #666;
-        border-bottom: 0.5px solid #e0e0e0;
-    }
-
-    .site-list {
-        padding: 8px 0;
-    }
-
-    .site-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 20px;
-        text-decoration: none;
-        color: #1d1d1f;
-        transition: background-color 0.2s ease;
-        cursor: pointer;
-    }
-
-    .site-item:hover {
-        background-color: #f5f5f7;
-    }
-
-    .site-icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 12px;
-        background: #007AFF;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 10px;
-        font-weight: bold;
-        flex-shrink: 0;
-    }
-
-    .site-icon.warning {
-        background: #FF9500;
-    }
-
-    .site-icon.safe {
-        background: #34C759;
-    }
-
-    .site-info {
-        flex: 1;
-    }
-
-    .site-name {
-        font-size: 15px;
-        font-weight: 500;
-        margin-bottom: 2px;
-    }
-
-    .site-desc {
-        font-size: 12px;
-        color: #666;
-    }
-
-    .site-tags {
-        display: flex;
-        gap: 4px;
-        margin-left: 8px;
-        align-items: center;
-    }
-
-    .tag {
-        background: #f0f0f0;
-        color: #666;
-        font-size: 10px;
-        padding: 2px 6px;
-        border-radius: 8px;
-        border: 0.5px solid #ddd;
-    }
-
-    .tag.official {
-        background: #e7f3ff;
-        color: #007AFF;
-        border-color: #007AFF;
-    }
-
-    .tag.vip {
-        background: #fff3e0;
-        color: #FF9500;
-        border-color: #FF9500;
-    }
-
-    .theme-toggle {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: #007AFF;
-        color: white;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
-        z-index: 1000;
-    }
-
-    .theme-toggle:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
-    }
-
-    .footer {
-        text-align: center;
-        padding: 40px 20px;
-        color: #86868b;
-        font-size: 12px;
-    }
-
-    /* Dark Mode */
-    .dark-mode {
-        background: #000000;
-        color: #f5f5f7;
-    }
-
-
-
-    .dark-mode .category-section {
-        background: #1c1c1e;
-        box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
-    }
-
-    .dark-mode .subcategory-title {
-        background: #2c2c2e;
-        color: #999;
-        border-bottom-color: #333;
-    }
-
-    .dark-mode .site-item {
-        color: #f5f5f7;
-    }
-
-    .dark-mode .site-item:hover {
-        background-color: #2c2c2e;
-    }
-
-    .dark-mode .site-desc {
-        color: #999;
-    }
-
-    .dark-mode .tag {
-        background: #2c2c2e;
-        color: #999;
-        border-color: #444;
-    }
-
-    .dark-mode .theme-toggle {
-        background: #f5f5f7;
-        color: #000;
-        box-shadow: 0 4px 12px rgba(245, 245, 247, 0.3);
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+            color: #1d1d1f;
+            font-weight: 400;
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+        }
         .container {
-            padding: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .site-item {
-            padding: 12px 15px;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #86868b;
+            font-size: 1.1em;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        .category-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .category-section:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
         .category-header {
-            padding: 12px 15px;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f5f5f7;
+            transition: background-color 0.2s ease;
         }
-        
-        .subcategory-title {
-            padding: 10px 15px;
+        .category-header:hover {
+            background: #f9f9f9;
         }
-    }
-</style>
-```
-
+        .category-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .category-icon {
+            font-size: 1.5em;
+        }
+        .category-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        .site-count {
+            background: #007aff;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        .toggle-icon {
+            font-size: 0.8em;
+            color: #86868b;
+            transition: transform 0.3s ease;
+        }
+        .category-section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        .sites-grid {
+            padding: 0 20px 20px;
+            display: grid;
+            gap: 12px;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .category-section.collapsed .sites-grid {
+            max-height: 0;
+            padding: 0 20px;
+        }
+        .site-card {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .site-card:hover {
+            background: #f0f0f0;
+            transform: translateX(4px);
+        }
+        .site-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 8px;
+            margin-right: 12px;
+            font-size: 1.2em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .site-info {
+            flex: 1;
+        }
+        .site-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .site-desc {
+            color: #86868b;
+            font-size: 0.9em;
+        }
+        .site-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #86868b;
+        }
+        .site-status.active {
+            background: #30d158;
+        }
+        /* 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #000;
+                color: #f5f5f7;
+            }
+            .category-section {
+                background: #1d1d1f;
+                box-shadow: 0 4px 16px rgba(255,255,255,0.08);
+            }
+            .category-section:hover {
+                box-shadow: 0 6px 20px rgba(255,255,255,0.12);
+            }
+            .category-header {
+                border-bottom-color: #2c2c2e;
+            }
+            .category-header:hover {
+                background: #2c2c2e;
+            }
+            .site-card {
+                background: #2c2c2e;
+            }
+            .site-card:hover {
+                background: #3a3a3c;
+            }
+            .site-icon {
+                background: #1d1d1f;
+            }
+            .theme-toggle {
+                background: #1d1d1f;
+                color: #f5f5f7;
+            }
+        }
+        .dark-theme {
+            background: #000;
+            color: #f5f5f7;
+        }
+        .dark-theme .category-section {
+            background: #1d1d1f;
+            box-shadow: 0 4px 16px rgba(255,255,255,0.08);
+        }
+        .dark-theme .category-section:hover {
+            box-shadow: 0 6px 20px rgba(255,255,255,0.12);
+        }
+        .dark-theme .category-header {
+            border-bottom-color: #2c2c2e;
+        }
+        .dark-theme .category-header:hover {
+            background: #2c2c2e;
+        }
+        .dark-theme .site-card {
+            background: #2c2c2e;
+        }
+        .dark-theme .site-card:hover {
+            background: #3a3a3c;
+        }
+        .dark-theme .site-icon {
+            background: #1d1d1f;
+        }
+        .dark-theme .theme-toggle {
+            background: #1d1d1f;
+            color: #f5f5f7;
+        }
+    </style>
 </head>
 <body>
-
-```
-<div class="container">
-    <!-- 影视动漫 -->
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            影视动漫
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>FMON导航站</h1>
+            <p>精选优质资源，一站式导航</p>
         </div>
-        <div class="category-content">
-            <div class="subcategory">
-                <div class="subcategory-title">网页综合（在线/下载）</div>
-                <div class="site-list">
-                    <a href="#" class="site-item">
-                        <div class="site-icon safe">厂</div>
-                        <div class="site-info">
-                            <div class="site-name">厂长资源官网</div>
-                            <div class="site-desc">www.czzy.site</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon safe">看</div>
-                        <div class="site-info">
-                            <div class="site-name">电视剧 — 看片狂人</div>
-                            <div class="site-desc">kpkuang.bond</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon safe">观</div>
-                        <div class="site-info">
-                            <div class="site-name">观影 GYING</div>
-                            <div class="site-desc">www.gying.org</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon warning">X</div>
-                        <div class="site-info">
-                            <div class="site-name">XXXClub</div>
-                            <div class="site-desc">xxxclub.to</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">1</div>
-                        <div class="site-info">
-                            <div class="site-name">1337x</div>
-                            <div class="site-desc">1337x.torrentbay.st</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">C</div>
-                        <div class="site-info">
-                            <div class="site-name">CHAOSPACE</div>
-                            <div class="site-desc">www.chaospace.cc</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon safe">S</div>
-                        <div class="site-info">
-                            <div class="site-name">SeedHub | 影视&动漫分享</div>
-                            <div class="site-desc">www.seedhub.cc</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">B</div>
-                        <div class="site-info">
-                            <div class="site-name">Browse :: Sukebei</div>
-                            <div class="site-desc">sukebei.nyaa.si</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">S</div>
-                        <div class="site-info">
-                            <div class="site-name">https://subhd.tv/sub/topmv</div>
-                            <div class="site-desc">subhd.tv</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">阿</div>
-                        <div class="site-info">
-                            <div class="site-name">阿虚同学的储物间</div>
-                            <div class="site-desc">axutongxue.com</div>
-                        </div>
-                    </a>
+        <div class="category-section" data-category="video">
+            <div class="category-header" onclick="toggleCategory('video')">
+                <div class="category-info">
+                    <span class="category-icon">📺</span>
+                    <span class="category-title">影视动漫</span>
+                    <span class="site-count">5</span>
                 </div>
+                <span class="toggle-icon">▼</span>
             </div>
-            <div class="subcategory">
-                <div class="subcategory-title">国产剧专区</div>
-                <div class="site-list">
-                    <a href="#" class="site-item">
-                        <div class="site-icon warning">V</div>
-                        <div class="site-info">
-                            <div class="site-name">饺子影院（国产剧少）</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon warning">L</div>
-                        <div class="site-info">
-                            <div class="site-name">LIBVIO（无国产剧）</div>
-                        </div>
-                        <div class="site-tags">
-                            <span class="tag">资源</span>
-                            <span class="tag">地址</span>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon warning">N</div>
-                        <div class="site-info">
-                            <div class="site-name">NO视频（无大陆剧）</div>
-                        </div>
-                    </a>
+            <div class="sites-grid">
+                <a href="https://www.czzy.site" target="_blank" class="site-card">
+                    <div class="site-icon">🎬</div>
+                    <div class="site-info">
+                        <div class="site-name">厂长资源</div>
+                        <div class="site-desc">高质量影视资源</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.gying.org" target="_blank" class="site-card">
+                    <div class="site-icon">📽️</div>
+                    <div class="site-info">
+                        <div class="site-name">观影影视</div>
+                        <div class="site-desc">在线观影平台</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.chaospace.cc" target="_blank" class="site-card">
+                    <div class="site-icon">💎</div>
+                    <div class="site-info">
+                        <div class="site-name">蓝光影视</div>
+                        <div class="site-desc">蓝光品质资源</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.seedhub.cc" target="_blank" class="site-card">
+                    <div class="site-icon">🌟</div>
+                    <div class="site-info">
+                        <div class="site-name">影视动漫</div>
+                        <div class="site-desc">动漫影视资源</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://ddys.info" target="_blank" class="site-card">
+                    <div class="site-icon">📱</div>
+                    <div class="site-info">
+                        <div class="site-name">低端影视</div>
+                        <div class="site-desc">免费在线观看</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section collapsed" data-category="books">
+            <div class="category-header" onclick="toggleCategory('books')">
+                <div class="category-info">
+                    <span class="category-icon">📚</span>
+                    <span class="category-title">电子书籍</span>
+                    <span class="site-count">0</span>
                 </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <!-- 书籍站点可以在这里添加 -->
+            </div>
+        </div>
+        <div class="category-section collapsed" data-category="search">
+            <div class="category-header" onclick="toggleCategory('search')">
+                <div class="category-info">
+                    <span class="category-icon">🧲</span>
+                    <span class="category-title">磁力搜索</span>
+                    <span class="site-count">0</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <!-- 搜索站点可以在这里添加 -->
+            </div>
+        </div>
+        <div class="category-section collapsed" data-category="ai">
+            <div class="category-header" onclick="toggleCategory('ai')">
+                <div class="category-info">
+                    <span class="category-icon">🤖</span>
+                    <span class="category-title">AI工具</span>
+                    <span class="site-count">0</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <!-- AI工具可以在这里添加 -->
             </div>
         </div>
     </div>
-
-    <!-- 电子书籍 -->
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            电子书籍
-        </div>
-        <div class="category-content collapsed">
-            <div class="subcategory">
-                <div class="subcategory-title">综合书库</div>
-                <div class="site-list">
-                    <a href="#" class="site-item">
-                        <div class="site-icon">Z</div>
-                        <div class="site-info">
-                            <div class="site-name">Z-Library</div>
-                            <div class="site-desc">全球最大数字图书馆</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">书</div>
-                        <div class="site-info">
-                            <div class="site-name">书格</div>
-                            <div class="site-desc">古籍数字化图书馆</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 磁力搜索 -->
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            磁力搜索
-        </div>
-        <div class="category-content collapsed">
-            <div class="subcategory">
-                <div class="subcategory-title">磁力搜索引擎</div>
-                <div class="site-list">
-                    <a href="#" class="site-item">
-                        <div class="site-icon">磁</div>
-                        <div class="site-info">
-                            <div class="site-name">磁力猫</div>
-                            <div class="site-desc">专业的磁力链接搜索引擎</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">BT</div>
-                        <div class="site-info">
-                            <div class="site-name">BT樱桃</div>
-                            <div class="site-desc">BT种子搜索下载</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI工具 -->
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            AI工具
-        </div>
-        <div class="category-content collapsed">
-            <div class="subcategory">
-                <div class="subcategory-title">AI对话</div>
-                <div class="site-list">
-                    <a href="#" class="site-item">
-                        <div class="site-icon">C</div>
-                        <div class="site-info">
-                            <div class="site-name">Claude</div>
-                            <div class="site-desc">Anthropic AI助手</div>
-                        </div>
-                    </a>
-                    <a href="#" class="site-item">
-                        <div class="site-icon">G</div>
-                        <div class="site-info">
-                            <div class="site-name">ChatGPT</div>
-                            <div class="site-desc">OpenAI聊天机器人</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 其他分类保持折叠状态 -->
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            优惠福利
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            常用软件
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            实用网站
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            学习资源
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            设计工具
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            娱乐休闲
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-
-    <div class="category-section">
-        <div class="category-header" onclick="toggleCategory(this)">
-            技术支持
-        </div>
-        <div class="category-content collapsed">
-            <!-- 内容 -->
-        </div>
-    </div>
-</div>
-
-<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-<div class="footer">
-    <div>fmoncn.github.io</div>
-</div>
-
-<script>
-    function toggleCategory(header) {
-        const content = header.nextElementSibling;
-        const isCollapsed = content.classList.contains('collapsed');
-        
-        if (isCollapsed) {
-            content.classList.remove('collapsed');
-            header.classList.remove('collapsed');
-        } else {
-            content.classList.add('collapsed');
-            header.classList.add('collapsed');
+    <script>
+        // 主题切换
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            body.classList.toggle('dark-theme');
+            
+            if (body.classList.contains('dark-theme')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+            
+            // 触觉反馈
+            if ('vibrate' in navigator) {
+                navigator.vibrate(50);
+            }
         }
-        
-        // 添加轻微的振动反馈
-        if ('vibrate' in navigator) {
-            navigator.vibrate(10);
+        // 分类折叠切换
+        function toggleCategory(category) {
+            const section = document.querySelector(`[data-category="${category}"]`);
+            section.classList.toggle('collapsed');
+            
+            // 触觉反馈
+            if ('vibrate' in navigator) {
+                navigator.vibrate(30);
+            }
         }
-    }
-
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const toggle = document.querySelector('.theme-toggle');
-        toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-        
-        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-
-    function loadTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.querySelector('.theme-toggle').textContent = '☀️';
-        }
-    }
-
-    // 防止链接默认行为
-    document.querySelectorAll('.site-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('点击了:', this.querySelector('.site-name').textContent);
+        // 页面加载时应用保存的主题
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+            }
         });
-    });
-
-    // 页面加载时初始化
-    document.addEventListener('DOMContentLoaded', loadTheme);
-
-    // 添加平滑滚动
-    document.documentElement.style.scrollBehavior = 'smooth';
-</script>
-```
-
+    </script>
 </body>
 </html>
