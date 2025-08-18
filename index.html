@@ -1,10 +1,335 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>FMON导航站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
+        background: #ffffff;
+        min-height: 100vh;
+        color: #1d1d1f;
+        font-weight: 400;
+        line-height: 1.47059;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.04);
+        padding: 0;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+    }
+
+    .close-button:hover {
+        background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .close-button::before,
+    .close-button::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 1.5px;
+        background: #1d1d1f;
+        border-radius: 1px;
+    }
+
+    .close-button::before {
+        transform: rotate(45deg);
+    }
+
+    .close-button::after {
+        transform: rotate(-45deg);
+    }
+
+    .container {
+        padding: 44px 20px 20px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        display: block;
+        padding: 22px 0;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        transition: background-color 0.2s ease;
+        margin: 0 -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .nav-item:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-item:active {
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-text {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+        line-height: 1.14286;
+    }
+
+    .theme-toggle {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(20px);
+        z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    .footer {
+        text-align: center;
+        padding: 40px 20px 100px;
+        color: #86868b;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    /* Dark Mode */
+    .dark-mode {
+        background: #000000;
+        color: #f5f5f7;
+    }
+
+    .dark-mode .header {
+        background: rgba(0, 0, 0, 0.8);
+        border-bottom-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .dark-mode .close-button::before,
+    .dark-mode .close-button::after {
+        background: #f5f5f7;
+    }
+
+    .dark-mode .close-button:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .dark-mode .nav-item {
+        border-bottom-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .dark-mode .nav-item:hover {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .dark-mode .nav-item:active {
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dark-mode .theme-toggle {
+        background: rgba(255, 255, 255, 0.8);
+        color: #000000;
+    }
+
+    .dark-mode .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .container {
+            padding: 44px 16px 20px;
+        }
+        
+        .nav-item {
+            margin: 0 -16px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        
+        .nav-text {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .nav-text {
+            font-size: 22px;
+        }
+    }
+
+    /* Touch improvements */
+    @media (hover: none) and (pointer: coarse) {
+        .nav-item:hover {
+            background-color: transparent;
+        }
+    }
+</style>
+```
+
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div class="header">
+        <div class="close-button" onclick="closeMenu()"></div>
+    </div>
+
+```
+<div class="container">
+    <a href="#video" class="nav-item" onclick="navigate('video')">
+        <div class="nav-text">影视动漫</div>
+    </a>
+
+    <a href="#books" class="nav-item" onclick="navigate('books')">
+        <div class="nav-text">电子书籍</div>
+    </a>
+
+    <a href="#bt" class="nav-item" onclick="navigate('bt')">
+        <div class="nav-text">磁力搜索</div>
+    </a>
+
+    <a href="#ai" class="nav-item" onclick="navigate('ai')">
+        <div class="nav-text">AI工具</div>
+    </a>
+
+    <a href="#deals" class="nav-item" onclick="navigate('deals')">
+        <div class="nav-text">优惠福利</div>
+    </a>
+
+    <a href="#mobile-pc" class="nav-item" onclick="navigate('mobile-pc')">
+        <div class="nav-text">常用软件</div>
+    </a>
+
+    <a href="#websites" class="nav-item" onclick="navigate('websites')">
+        <div class="nav-text">实用网站</div>
+    </a>
+
+    <a href="#learning" class="nav-item" onclick="navigate('learning')">
+        <div class="nav-text">学习资源</div>
+    </a>
+
+    <a href="#design" class="nav-item" onclick="navigate('design')">
+        <div class="nav-text">设计工具</div>
+    </a>
+
+    <a href="#entertainment" class="nav-item" onclick="navigate('entertainment')">
+        <div class="nav-text">娱乐休闲</div>
+    </a>
+
+    <a href="#support" class="nav-item" onclick="navigate('support')">
+        <div class="nav-text">技术支持</div>
+    </a>
+</div>
+
+<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+<div class="footer">
+    <div>fmoncn.github.io</div>
+</div>
+
+<script>
+    // Theme toggle functionality
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const toggle = document.querySelector('.theme-toggle');
+        toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        
+        // Save theme preference
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    }
+
+    // Load saved theme
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+    }
+
+    // Navigation functions
+    function navigate(section) {
+        // Here you would implement navigation to different sections
+        console.log('Navigating to:', section);
+        // For demo purposes, show an alert
+        alert(`导航到: ${section} 区域`);
+    }
+
+    function closeMenu() {
+        // Close menu functionality
+        console.log('Close menu clicked');
+        alert('关闭菜单');
+    }
+
+    // Add smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Load theme on page load
+    document.addEventListener('DOMContentLoaded', loadTheme);
+
+    // Prevent default link behavior for demo
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+        });
+    });
+
+    // Add haptic feedback simulation on touch devices
+    if ('vibrate' in navigator) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('touchstart', function() {
+                navigator.vibrate(10); // Very light haptic feedback
+            });
+        });
+    }
+</script>
+```
+
 </body>
 </html>
