@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FMON导航站</title>
     <style>
         * {
@@ -15,7 +15,7 @@
 ```
     body {
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
-        background: #ffffff;
+        background: #f5f5f7;
         min-height: 100vh;
         color: #1d1d1f;
         font-weight: 400;
@@ -23,99 +23,164 @@
         -webkit-font-smoothing: antialiased;
     }
 
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: saturate(180%) blur(20px);
-        border-bottom: 0.5px solid rgba(0, 0, 0, 0.04);
-        padding: 0;
-    }
 
-    .close-button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background-color 0.2s ease;
-    }
-
-    .close-button:hover {
-        background-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .close-button::before,
-    .close-button::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 1.5px;
-        background: #1d1d1f;
-        border-radius: 1px;
-    }
-
-    .close-button::before {
-        transform: rotate(45deg);
-    }
-
-    .close-button::after {
-        transform: rotate(-45deg);
-    }
 
     .container {
-        padding: 44px 20px 20px;
-        max-width: 500px;
+        padding: 20px;
+        max-width: 600px;
         margin: 0 auto;
     }
 
-    .nav-item {
-        display: block;
-        padding: 22px 0;
-        border-bottom: 0.5px solid rgba(0, 0, 0, 0.04);
-        cursor: pointer;
-        text-decoration: none;
-        color: inherit;
-        transition: background-color 0.2s ease;
-        margin: 0 -20px;
-        padding-left: 20px;
-        padding-right: 20px;
+    .category-section {
+        margin-bottom: 30px;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    .nav-item:last-child {
+    .category-header {
+        padding: 15px 20px;
+        background: #007AFF;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+    }
+
+    .category-header::after {
+        content: '▼';
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .category-header.collapsed::after {
+        transform: rotate(-90deg);
+    }
+
+    .category-content {
+        max-height: 1000px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .category-content.collapsed {
+        max-height: 0;
+    }
+
+    .subcategory {
+        border-bottom: 0.5px solid #f0f0f0;
+    }
+
+    .subcategory:last-child {
         border-bottom: none;
     }
 
-    .nav-item:hover {
-        background-color: rgba(0, 0, 0, 0.04);
+    .subcategory-title {
+        padding: 12px 20px;
+        background: #f8f9fa;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666;
+        border-bottom: 0.5px solid #e0e0e0;
     }
 
-    .nav-item:active {
-        background-color: rgba(0, 0, 0, 0.08);
+    .site-list {
+        padding: 8px 0;
     }
 
-    .nav-text {
-        font-size: 28px;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        line-height: 1.14286;
+    .site-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #1d1d1f;
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+    }
+
+    .site-item:hover {
+        background-color: #f5f5f7;
+    }
+
+    .site-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        background: #007AFF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .site-icon.warning {
+        background: #FF9500;
+    }
+
+    .site-icon.safe {
+        background: #34C759;
+    }
+
+    .site-info {
+        flex: 1;
+    }
+
+    .site-name {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 2px;
+    }
+
+    .site-desc {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .site-tags {
+        display: flex;
+        gap: 4px;
+        margin-left: 8px;
+        align-items: center;
+    }
+
+    .tag {
+        background: #f0f0f0;
+        color: #666;
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 8px;
+        border: 0.5px solid #ddd;
+    }
+
+    .tag.official {
+        background: #e7f3ff;
+        color: #007AFF;
+        border-color: #007AFF;
+    }
+
+    .tag.vip {
+        background: #fff3e0;
+        color: #FF9500;
+        border-color: #FF9500;
     }
 
     .theme-toggle {
         position: fixed;
         bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 30px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.8);
+        background: #007AFF;
         color: white;
         border: none;
         cursor: pointer;
@@ -124,21 +189,20 @@
         justify-content: center;
         font-size: 20px;
         transition: all 0.3s ease;
-        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
         z-index: 1000;
     }
 
     .theme-toggle:hover {
-        background: rgba(0, 0, 0, 0.9);
-        transform: translateX(-50%) scale(1.1);
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
     }
 
     .footer {
         text-align: center;
-        padding: 40px 20px 100px;
+        padding: 40px 20px;
         color: #86868b;
-        font-size: 14px;
-        font-weight: 400;
+        font-size: 12px;
     }
 
     /* Dark Mode */
@@ -147,68 +211,59 @@
         color: #f5f5f7;
     }
 
-    .dark-mode .header {
-        background: rgba(0, 0, 0, 0.8);
-        border-bottom-color: rgba(255, 255, 255, 0.04);
+
+
+    .dark-mode .category-section {
+        background: #1c1c1e;
+        box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
     }
 
-    .dark-mode .close-button::before,
-    .dark-mode .close-button::after {
-        background: #f5f5f7;
+    .dark-mode .subcategory-title {
+        background: #2c2c2e;
+        color: #999;
+        border-bottom-color: #333;
     }
 
-    .dark-mode .close-button:hover {
-        background-color: rgba(255, 255, 255, 0.06);
+    .dark-mode .site-item {
+        color: #f5f5f7;
     }
 
-    .dark-mode .nav-item {
-        border-bottom-color: rgba(255, 255, 255, 0.04);
+    .dark-mode .site-item:hover {
+        background-color: #2c2c2e;
     }
 
-    .dark-mode .nav-item:hover {
-        background-color: rgba(255, 255, 255, 0.04);
+    .dark-mode .site-desc {
+        color: #999;
     }
 
-    .dark-mode .nav-item:active {
-        background-color: rgba(255, 255, 255, 0.08);
+    .dark-mode .tag {
+        background: #2c2c2e;
+        color: #999;
+        border-color: #444;
     }
 
     .dark-mode .theme-toggle {
-        background: rgba(255, 255, 255, 0.8);
-        color: #000000;
+        background: #f5f5f7;
+        color: #000;
+        box-shadow: 0 4px 12px rgba(245, 245, 247, 0.3);
     }
 
-    .dark-mode .theme-toggle:hover {
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 480px) {
         .container {
-            padding: 44px 16px 20px;
+            padding: 15px;
         }
         
-        .nav-item {
-            margin: 0 -16px;
-            padding-left: 16px;
-            padding-right: 16px;
+        .site-item {
+            padding: 12px 15px;
         }
         
-        .nav-text {
-            font-size: 24px;
+        .category-header {
+            padding: 12px 15px;
         }
-    }
-
-    @media (max-width: 375px) {
-        .nav-text {
-            font-size: 22px;
-        }
-    }
-
-    /* Touch improvements */
-    @media (hover: none) and (pointer: coarse) {
-        .nav-item:hover {
-            background-color: transparent;
+        
+        .subcategory-title {
+            padding: 10px 15px;
         }
     }
 </style>
@@ -216,55 +271,267 @@
 
 </head>
 <body>
-    <div class="header">
-        <div class="close-button" onclick="closeMenu()"></div>
-    </div>
 
 ```
 <div class="container">
-    <a href="#video" class="nav-item" onclick="navigate('video')">
-        <div class="nav-text">影视动漫</div>
-    </a>
+    <!-- 影视动漫 -->
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            影视动漫
+        </div>
+        <div class="category-content">
+            <div class="subcategory">
+                <div class="subcategory-title">网页综合（在线/下载）</div>
+                <div class="site-list">
+                    <a href="#" class="site-item">
+                        <div class="site-icon safe">厂</div>
+                        <div class="site-info">
+                            <div class="site-name">厂长资源官网</div>
+                            <div class="site-desc">www.czzy.site</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon safe">看</div>
+                        <div class="site-info">
+                            <div class="site-name">电视剧 — 看片狂人</div>
+                            <div class="site-desc">kpkuang.bond</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon safe">观</div>
+                        <div class="site-info">
+                            <div class="site-name">观影 GYING</div>
+                            <div class="site-desc">www.gying.org</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon warning">X</div>
+                        <div class="site-info">
+                            <div class="site-name">XXXClub</div>
+                            <div class="site-desc">xxxclub.to</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">1</div>
+                        <div class="site-info">
+                            <div class="site-name">1337x</div>
+                            <div class="site-desc">1337x.torrentbay.st</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">C</div>
+                        <div class="site-info">
+                            <div class="site-name">CHAOSPACE</div>
+                            <div class="site-desc">www.chaospace.cc</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon safe">S</div>
+                        <div class="site-info">
+                            <div class="site-name">SeedHub | 影视&动漫分享</div>
+                            <div class="site-desc">www.seedhub.cc</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">B</div>
+                        <div class="site-info">
+                            <div class="site-name">Browse :: Sukebei</div>
+                            <div class="site-desc">sukebei.nyaa.si</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">S</div>
+                        <div class="site-info">
+                            <div class="site-name">https://subhd.tv/sub/topmv</div>
+                            <div class="site-desc">subhd.tv</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">阿</div>
+                        <div class="site-info">
+                            <div class="site-name">阿虚同学的储物间</div>
+                            <div class="site-desc">axutongxue.com</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="subcategory">
+                <div class="subcategory-title">国产剧专区</div>
+                <div class="site-list">
+                    <a href="#" class="site-item">
+                        <div class="site-icon warning">V</div>
+                        <div class="site-info">
+                            <div class="site-name">饺子影院（国产剧少）</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon warning">L</div>
+                        <div class="site-info">
+                            <div class="site-name">LIBVIO（无国产剧）</div>
+                        </div>
+                        <div class="site-tags">
+                            <span class="tag">资源</span>
+                            <span class="tag">地址</span>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon warning">N</div>
+                        <div class="site-info">
+                            <div class="site-name">NO视频（无大陆剧）</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="#books" class="nav-item" onclick="navigate('books')">
-        <div class="nav-text">电子书籍</div>
-    </a>
+    <!-- 电子书籍 -->
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            电子书籍
+        </div>
+        <div class="category-content collapsed">
+            <div class="subcategory">
+                <div class="subcategory-title">综合书库</div>
+                <div class="site-list">
+                    <a href="#" class="site-item">
+                        <div class="site-icon">Z</div>
+                        <div class="site-info">
+                            <div class="site-name">Z-Library</div>
+                            <div class="site-desc">全球最大数字图书馆</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">书</div>
+                        <div class="site-info">
+                            <div class="site-name">书格</div>
+                            <div class="site-desc">古籍数字化图书馆</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="#bt" class="nav-item" onclick="navigate('bt')">
-        <div class="nav-text">磁力搜索</div>
-    </a>
+    <!-- 磁力搜索 -->
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            磁力搜索
+        </div>
+        <div class="category-content collapsed">
+            <div class="subcategory">
+                <div class="subcategory-title">磁力搜索引擎</div>
+                <div class="site-list">
+                    <a href="#" class="site-item">
+                        <div class="site-icon">磁</div>
+                        <div class="site-info">
+                            <div class="site-name">磁力猫</div>
+                            <div class="site-desc">专业的磁力链接搜索引擎</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">BT</div>
+                        <div class="site-info">
+                            <div class="site-name">BT樱桃</div>
+                            <div class="site-desc">BT种子搜索下载</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="#ai" class="nav-item" onclick="navigate('ai')">
-        <div class="nav-text">AI工具</div>
-    </a>
+    <!-- AI工具 -->
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            AI工具
+        </div>
+        <div class="category-content collapsed">
+            <div class="subcategory">
+                <div class="subcategory-title">AI对话</div>
+                <div class="site-list">
+                    <a href="#" class="site-item">
+                        <div class="site-icon">C</div>
+                        <div class="site-info">
+                            <div class="site-name">Claude</div>
+                            <div class="site-desc">Anthropic AI助手</div>
+                        </div>
+                    </a>
+                    <a href="#" class="site-item">
+                        <div class="site-icon">G</div>
+                        <div class="site-info">
+                            <div class="site-name">ChatGPT</div>
+                            <div class="site-desc">OpenAI聊天机器人</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="#deals" class="nav-item" onclick="navigate('deals')">
-        <div class="nav-text">优惠福利</div>
-    </a>
+    <!-- 其他分类保持折叠状态 -->
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            优惠福利
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#mobile-pc" class="nav-item" onclick="navigate('mobile-pc')">
-        <div class="nav-text">常用软件</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            常用软件
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#websites" class="nav-item" onclick="navigate('websites')">
-        <div class="nav-text">实用网站</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            实用网站
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#learning" class="nav-item" onclick="navigate('learning')">
-        <div class="nav-text">学习资源</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            学习资源
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#design" class="nav-item" onclick="navigate('design')">
-        <div class="nav-text">设计工具</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            设计工具
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#entertainment" class="nav-item" onclick="navigate('entertainment')">
-        <div class="nav-text">娱乐休闲</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            娱乐休闲
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 
-    <a href="#support" class="nav-item" onclick="navigate('support')">
-        <div class="nav-text">技术支持</div>
-    </a>
+    <div class="category-section">
+        <div class="category-header" onclick="toggleCategory(this)">
+            技术支持
+        </div>
+        <div class="category-content collapsed">
+            <!-- 内容 -->
+        </div>
+    </div>
 </div>
 
 <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
@@ -274,17 +541,32 @@
 </div>
 
 <script>
-    // Theme toggle functionality
+    function toggleCategory(header) {
+        const content = header.nextElementSibling;
+        const isCollapsed = content.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            content.classList.remove('collapsed');
+            header.classList.remove('collapsed');
+        } else {
+            content.classList.add('collapsed');
+            header.classList.add('collapsed');
+        }
+        
+        // 添加轻微的振动反馈
+        if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+        }
+    }
+
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
         const toggle = document.querySelector('.theme-toggle');
         toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
         
-        // Save theme preference
         localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
     }
 
-    // Load saved theme
     function loadTheme() {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
@@ -293,41 +575,19 @@
         }
     }
 
-    // Navigation functions
-    function navigate(section) {
-        // Here you would implement navigation to different sections
-        console.log('Navigating to:', section);
-        // For demo purposes, show an alert
-        alert(`导航到: ${section} 区域`);
-    }
-
-    function closeMenu() {
-        // Close menu functionality
-        console.log('Close menu clicked');
-        alert('关闭菜单');
-    }
-
-    // Add smooth scrolling
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Load theme on page load
-    document.addEventListener('DOMContentLoaded', loadTheme);
-
-    // Prevent default link behavior for demo
-    document.querySelectorAll('.nav-item').forEach(item => {
+    // 防止链接默认行为
+    document.querySelectorAll('.site-item').forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('点击了:', this.querySelector('.site-name').textContent);
         });
     });
 
-    // Add haptic feedback simulation on touch devices
-    if ('vibrate' in navigator) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('touchstart', function() {
-                navigator.vibrate(10); // Very light haptic feedback
-            });
-        });
-    }
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', loadTheme);
+
+    // 添加平滑滚动
+    document.documentElement.style.scrollBehavior = 'smooth';
 </script>
 ```
 
