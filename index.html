@@ -12,7 +12,7 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f5f7;
             min-height: 100vh;
             color: #1d1d1f;
             font-weight: 400;
@@ -21,413 +21,566 @@
             transition: all 0.3s ease;
         }
         body.dark-theme {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: #1d1d1f;
             color: #f5f5f7;
         }
         .container {
-            max-width: 1200px;
+            padding: 20px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 40px 20px;
         }
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #d2d2d7;
+            transition: border-color 0.3s ease;
         }
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
+        body.dark-theme .header {
+            border-bottom-color: #424245;
         }
-        .header p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .site-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+        body.dark-theme .site-title {
+            color: #f5f5f7;
+        }
+        .site-subtitle {
+            font-size: 16px;
+            color: #86868b;
+            font-weight: 400;
+        }
+        body.dark-theme .site-subtitle {
+            color: #a1a1a6;
         }
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            color: white;
+            background: #ffffff;
+            border: 1px solid #d2d2d7;
+            border-radius: 20px;
+            padding: 8px 16px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             z-index: 1000;
         }
+        body.dark-theme .theme-toggle {
+            background: #2c2c2e;
+            border-color: #424245;
+            color: #f5f5f7;
+        }
         .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
         }
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        .category {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .category-section {
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        .category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        body.dark-theme .category-section {
+            background: #2c2c2e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         .category-header {
-            padding: 20px 25px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 16px 20px;
             cursor: pointer;
-            user-select: none;
-            transition: all 0.3s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #f2f2f7;
+            transition: all 0.3s ease;
+        }
+        body.dark-theme .category-header {
+            border-bottom-color: #424245;
         }
         .category-header:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: #f9f9fb;
         }
-        .category-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: white;
+        body.dark-theme .category-header:hover {
+            background: #38383a;
+        }
+        .category-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        .category-icon {
-            font-size: 1.5rem;
-        }
-        .toggle-arrow {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s ease;
-        }
-        .category.collapsed .toggle-arrow {
-            transform: rotate(-90deg);
-        }
-        .links-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-        .category:not(.collapsed) .links-container {
-            max-height: 500px;
-        }
-        .links {
-            padding: 0 25px 25px 25px;
-            display: grid;
             gap: 12px;
         }
-        .link-item {
+        .category-icon {
+            font-size: 20px;
+        }
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            transition: color 0.3s ease;
+        }
+        body.dark-theme .category-title {
+            color: #f5f5f7;
+        }
+        .site-count {
+            background: #007aff;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .toggle-icon {
+            font-size: 14px;
+            color: #86868b;
+            transition: all 0.3s ease;
+        }
+        body.dark-theme .toggle-icon {
+            color: #a1a1a6;
+        }
+        .category-section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        .sites-grid {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .category-section:not(.collapsed) .sites-grid {
+            max-height: 1000px;
+            padding: 20px;
+        }
+        .site-card {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f9f9fb;
+            border-radius: 8px;
             text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: inherit;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
-        .link-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
-            border-color: rgba(255, 255, 255, 0.3);
+        body.dark-theme .site-card {
+            background: #38383a;
         }
-        .link-name {
-            font-weight: 500;
-            font-size: 1rem;
+        .site-card:hover {
+            background: #f2f2f7;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-theme .site-card:hover {
+            background: #424245;
+        }
+        .site-card:last-child {
+            margin-bottom: 0;
+        }
+        .site-icon {
+            font-size: 18px;
+            margin-right: 12px;
+            min-width: 20px;
+        }
+        .site-info {
             flex: 1;
         }
-        .link-url {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'SF Mono', Monaco, monospace;
-        }
-        .expand-all-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
+        .site-name {
+            font-size: 16px;
             font-weight: 500;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #1d1d1f;
+            margin-bottom: 2px;
+            transition: color 0.3s ease;
         }
-        .expand-all-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
+        body.dark-theme .site-name {
+            color: #f5f5f7;
+        }
+        .site-desc {
+            font-size: 13px;
+            color: #86868b;
+            transition: color 0.3s ease;
+        }
+        body.dark-theme .site-desc {
+            color: #a1a1a6;
+        }
+        .site-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34c759;
+            margin-left: 12px;
+        }
+        .site-status.inactive {
+            background: #ff3b30;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #86868b;
+            font-size: 14px;
+            border-top: 1px solid #d2d2d7;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+        }
+        body.dark-theme .footer {
+            color: #a1a1a6;
+            border-top-color: #424245;
         }
         @media (max-width: 768px) {
-            .categories {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
             .container {
-                padding: 20px 15px;
+                padding: 15px;
             }
             
-            .theme-toggle, .expand-all-btn {
-                padding: 10px 15px;
+            .header {
+                margin-bottom: 30px;
+            }
+            
+            .site-title {
+                font-size: 24px;
+            }
+            
+            .theme-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
                 font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 深色模式</button>
-    <button class="expand-all-btn" onclick="toggleAllCategories()">📂 展开全部</button>
+    <div class="theme-toggle" onclick="toggleTheme()">🌙 深色模式</div>
+    
     <div class="container">
         <div class="header">
-            <h1>FMON导航站</h1>
-            <p>精选优质资源，一站式导航体验</p>
+            <h1 class="site-title">FMON导航站</h1>
+            <p class="site-subtitle">精选优质网站，高效便捷导航</p>
         </div>
-        <div class="categories">
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">🤖</span>
-                        人工智能
-                    </div>
-                    <span class="toggle-arrow">▼</span>
+
+        <div class="category-section collapsed" data-category="ai">
+            <div class="category-header" onclick="toggleCategory('ai')">
+                <div class="category-info">
+                    <span class="category-icon">🤖</span>
+                    <span class="category-title">人工智能</span>
+                    <span class="site-count">3</span>
                 </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://artificialanalysis.ai" class="link-item" target="_blank">
-                            <span class="link-name">工具分析</span>
-                            <span class="link-url">artificialanalysis.ai</span>
-                        </a>
-                        <a href="https://ai-bot.cn/daily-ai-news" class="link-item" target="_blank">
-                            <span class="link-name">工具合集</span>
-                            <span class="link-url">ai-bot.cn</span>
-                        </a>
-                        <a href="https://wisdom-gate.juheapi.com?i=PlRy" class="link-item" target="_blank">
-                            <span class="link-name">赠送API</span>
-                            <span class="link-url">wisdom-gate.juheapi.com</span>
-                        </a>
-                    </div>
-                </div>
+                <span class="toggle-icon">▼</span>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">🎬</span>
-                        在线影视
+            <div class="sites-grid">
+                <a href="https://artificialanalysis.ai" target="_blank" class="site-card">
+                    <div class="site-icon">📊</div>
+                    <div class="site-info">
+                        <div class="site-name">工具分析</div>
+                        <div class="site-desc">AI性能对比分析</div>
                     </div>
-                    <span class="toggle-arrow">▼</span>
-                </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://www.czzy.site" class="link-item" target="_blank">
-                            <span class="link-name">厂长资源</span>
-                            <span class="link-url">czzy.site</span>
-                        </a>
-                        <a href="https://www.gying.org" class="link-item" target="_blank">
-                            <span class="link-name">观影影视</span>
-                            <span class="link-url">gying.org</span>
-                        </a>
-                        <a href="https://ddys.info" class="link-item" target="_blank">
-                            <span class="link-name">低端影视</span>
-                            <span class="link-url">ddys.info</span>
-                        </a>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://ai-bot.cn/daily-ai-news" target="_blank" class="site-card">
+                    <div class="site-icon">🛠️</div>
+                    <div class="site-info">
+                        <div class="site-name">工具合集</div>
+                        <div class="site-desc">AI工具资讯集合</div>
                     </div>
-                </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://wisdom-gate.juheapi.com?i=PlRy" target="_blank" class="site-card">
+                    <div class="site-icon">🎁</div>
+                    <div class="site-info">
+                        <div class="site-name">赠送API</div>
+                        <div class="site-desc">免费API接口</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">📁</span>
-                        影视资源
-                    </div>
-                    <span class="toggle-arrow">▼</span>
+        </div>
+
+        <div class="category-section collapsed" data-category="video">
+            <div class="category-header" onclick="toggleCategory('video')">
+                <div class="category-info">
+                    <span class="category-icon">📺</span>
+                    <span class="category-title">在线影视</span>
+                    <span class="site-count">3</span>
                 </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://x.xunlei.com" class="link-item" target="_blank">
-                            <span class="link-name">迅雷浏览</span>
-                            <span class="link-url">x.xunlei.com</span>
-                        </a>
-                        <a href="https://subhd.tv/sub/topmv" class="link-item" target="_blank">
-                            <span class="link-name">热门影视</span>
-                            <span class="link-url">subhd.tv</span>
-                        </a>
-                        <a href="https://www.seedhub.cc" class="link-item" target="_blank">
-                            <span class="link-name">影视动漫</span>
-                            <span class="link-url">seedhub.cc</span>
-                        </a>
-                    </div>
-                </div>
+                <span class="toggle-icon">▼</span>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">🎮</span>
-                        游戏音乐
+            <div class="sites-grid">
+                <a href="https://www.czzy.site" target="_blank" class="site-card">
+                    <div class="site-icon">🎬</div>
+                    <div class="site-info">
+                        <div class="site-name">厂长资源</div>
+                        <div class="site-desc">高质量影视资源</div>
                     </div>
-                    <span class="toggle-arrow">▼</span>
-                </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://www.ign.com.cn" class="link-item" target="_blank">
-                            <span class="link-name">IGN</span>
-                            <span class="link-url">ign.com.cn</span>
-                        </a>
-                        <a href="https://www.metacritic.com/game" class="link-item" target="_blank">
-                            <span class="link-name">Metacritic</span>
-                            <span class="link-url">metacritic.com</span>
-                        </a>
-                        <a href="https://steam250.com" class="link-item" target="_blank">
-                            <span class="link-name">Steam250</span>
-                            <span class="link-url">steam250.com</span>
-                        </a>
-                        <a href="https://soundloaders.app" class="link-item" target="_blank">
-                            <span class="link-name">Spotify下载</span>
-                            <span class="link-url">soundloaders.app</span>
-                        </a>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.gying.org" target="_blank" class="site-card">
+                    <div class="site-icon">🍿</div>
+                    <div class="site-info">
+                        <div class="site-name">观影影视</div>
+                        <div class="site-desc">在线观影平台</div>
                     </div>
-                </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://ddys.info" target="_blank" class="site-card">
+                    <div class="site-icon">📱</div>
+                    <div class="site-info">
+                        <div class="site-name">低端影视</div>
+                        <div class="site-desc">精品影视资源</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">📚</span>
-                        图像书籍
-                    </div>
-                    <span class="toggle-arrow">▼</span>
+        </div>
+        
+        <div class="category-section collapsed" data-category="download">
+            <div class="category-header" onclick="toggleCategory('download')">
+                <div class="category-info">
+                    <span class="category-icon">⬇️</span>
+                    <span class="category-title">影视资源</span>
+                    <span class="site-count">3</span>
                 </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://zh.annas-archive.org" class="link-item" target="_blank">
-                            <span class="link-name">安娜档案</span>
-                            <span class="link-url">annas-archive.org</span>
-                        </a>
-                        <a href="https://zlib.by" class="link-item" target="_blank">
-                            <span class="link-name">真图书馆</span>
-                            <span class="link-url">zlib.by</span>
-                        </a>
-                        <a href="https://www.gettyimages.com" class="link-item" target="_blank">
-                            <span class="link-name">图像资源</span>
-                            <span class="link-url">gettyimages.com</span>
-                        </a>
-                    </div>
-                </div>
+                <span class="toggle-icon">▼</span>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">📱</span>
-                        应用创意
+            <div class="sites-grid">
+                <a href="https://x.xunlei.com" target="_blank" class="site-card">
+                    <div class="site-icon">⚡</div>
+                    <div class="site-info">
+                        <div class="site-name">迅雷浏览</div>
+                        <div class="site-desc">高速下载工具</div>
                     </div>
-                    <span class="toggle-arrow">▼</span>
-                </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://appraven.net/" class="link-item" target="_blank">
-                            <span class="link-name">AppRaven</span>
-                            <span class="link-url">appraven.net</span>
-                        </a>
-                        <a href="https://6x.studio" class="link-item" target="_blank">
-                            <span class="link-name">AI客户端</span>
-                            <span class="link-url">6x.studio</span>
-                        </a>
-                        <a href="https://appraven.net/app/12724498" class="link-item" target="_blank">
-                            <span class="link-name">洋葱浏览器</span>
-                            <span class="link-url">appraven.net</span>
-                        </a>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://subhd.tv/sub/topmv" target="_blank" class="site-card">
+                    <div class="site-icon">🔥</div>
+                    <div class="site-info">
+                        <div class="site-name">热门影视</div>
+                        <div class="site-desc">字幕资源下载</div>
                     </div>
-                </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.seedhub.cc" target="_blank" class="site-card">
+                    <div class="site-icon">🌱</div>
+                    <div class="site-info">
+                        <div class="site-name">影视动漫</div>
+                        <div class="site-desc">种子资源分享</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
             </div>
-            <div class="category collapsed">
-                <div class="category-header" onclick="toggleCategory(this)">
-                    <div class="category-title">
-                        <span class="category-icon">🔬</span>
-                        学习科学
-                    </div>
-                    <span class="toggle-arrow">▼</span>
+        </div>
+
+        <div class="category-section collapsed" data-category="game">
+            <div class="category-header" onclick="toggleCategory('game')">
+                <div class="category-info">
+                    <span class="category-icon">🎮</span>
+                    <span class="category-title">游戏音乐</span>
+                    <span class="site-count">4</span>
                 </div>
-                <div class="links-container">
-                    <div class="links">
-                        <a href="https://arxiv.org" class="link-item" target="_blank">
-                            <span class="link-name">arxiv论文</span>
-                            <span class="link-url">arxiv.org</span>
-                        </a>
-                        <a href="https://github-trending.today/?since=weekly" class="link-item" target="_blank">
-                            <span class="link-name">GitHub趋势</span>
-                            <span class="link-url">github-trending.today</span>
-                        </a>
-                        <a href="https://nitter.privacyredirect.com" class="link-item" target="_blank">
-                            <span class="link-name">尼特网站</span>
-                            <span class="link-url">nitter.privacyredirect.com</span>
-                        </a>
-                    </div>
-                </div>
+                <span class="toggle-icon">▼</span>
             </div>
+            <div class="sites-grid">
+                <a href="https://www.ign.com.cn" target="_blank" class="site-card">
+                    <div class="site-icon">🔥</div>
+                    <div class="site-info">
+                        <div class="site-name">IGN</div>
+                        <div class="site-desc">游戏资讯与评测</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.metacritic.com/game" target="_blank" class="site-card">
+                    <div class="site-icon">Ⓜ️</div>
+                    <div class="site-info">
+                        <div class="site-name">Metacritic</div>
+                        <div class="site-desc">权威游戏评分汇总</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://steam250.com" target="_blank" class="site-card">
+                    <div class="site-icon">💨</div>
+                    <div class="site-info">
+                        <div class="site-name">Steam250</div>
+                        <div class="site-desc">Steam高分游戏排行</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+
+                <a href="https://soundloaders.app" target="_blank" class="site-card">
+                    <div class="site-icon">🎵</div>
+                    <div class="site-info">
+                        <div class="site-name">Spotify下载</div>
+                        <div class="site-desc">在线音乐下载工具</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section collapsed" data-category="ebook">
+            <div class="category-header" onclick="toggleCategory('ebook')">
+                <div class="category-info">
+                    <span class="category-icon">📚</span>
+                    <span class="category-title">图像书籍</span>
+                    <span class="site-count">3</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <a href="https://zh.annas-archive.org" target="_blank" class="site-card">
+                    <div class="site-icon">📖</div>
+                    <div class="site-info">
+                        <div class="site-name">安娜档案</div>
+                        <div class="site-desc">全球最大图书档案</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://zlib.by" target="_blank" class="site-card">
+                    <div class="site-icon">🔍</div>
+                    <div class="site-info">
+                        <div class="site-name">真图书馆</div>
+                        <div class="site-desc">数字图书平台</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://www.gettyimages.com" target="_blank" class="site-card">
+                    <div class="site-icon">🖼️</div>
+                    <div class="site-info">
+                        <div class="site-name">图像资源</div>
+                        <div class="site-desc">高质量图片素材库</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="category-section collapsed" data-category="software">
+            <div class="category-header" onclick="toggleCategory('software')">
+                <div class="category-info">
+                    <span class="category-icon">💡</span>
+                    <span class="category-title">应用创意</span>
+                    <span class="site-count">3</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <a href="https://appraven.net/" target="_blank" class="site-card">
+                    <div class="site-icon">🦅</div>
+                    <div class="site-info">
+                        <div class="site-name">AppRaven</div>
+                        <div class="site-desc">应用商店分析</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://6x.studio" target="_blank" class="site-card">
+                    <div class="site-icon">🎨</div>
+                    <div class="site-info">
+                        <div class="site-name">AI客户端</div>
+                        <div class="site-desc">AI应用工具</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://appraven.net/app/12724498" target="_blank" class="site-card">
+                    <div class="site-icon">🧅</div>
+                    <div class="site-info">
+                        <div class="site-name">洋葱浏览器</div>
+                        <div class="site-desc">隐私安全浏览</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section collapsed" data-category="science">
+            <div class="category-header" onclick="toggleCategory('science')">
+                <div class="category-info">
+                    <span class="category-icon">🔬</span>
+                    <span class="category-title">学习科学</span>
+                    <span class="site-count">3</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="sites-grid">
+                <a href="https://arxiv.org" target="_blank" class="site-card">
+                    <div class="site-icon">📄</div>
+                    <div class="site-info">
+                        <div class="site-name">arxiv论文</div>
+                        <div class="site-desc">前沿科技论文预印本</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://github-trending.today/? since=weekly" target="_blank" class="site-card">
+                    <div class="site-icon">🐙</div>
+                    <div class="site-info">
+                        <div class="site-name">GitHub趋势</div>
+                        <div class="site-desc">每周热门开源项目</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+                
+                <a href="https://nitter.privacyredirect.com" target="_blank" class="site-card">
+                    <div class="site-icon">🐦</div>
+                    <div class="site-info">
+                        <div class="site-name">尼特网站</div>
+                        <div class="site-desc">隐私保护社交</div>
+                    </div>
+                    <div class="site-status active"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 FMON导航站 - 精选优质资源，高效便捷导航</p>
         </div>
     </div>
     <script>
-        function toggleCategory(header) {
-            const category = header.parentElement;
-            category.classList.toggle('collapsed');
-        }
-        function toggleAllCategories() {
-            const categories = document.querySelectorAll('.category');
-            const btn = document.querySelector('.expand-all-btn');
-            const allCollapsed = Array.from(categories).every(cat => cat.classList.contains('collapsed'));
-            
-            categories.forEach(category => {
-                if (allCollapsed) {
-                    category.classList.remove('collapsed');
-                } else {
-                    category.classList.add('collapsed');
-                }
-            });
-            
-            btn.textContent = allCollapsed ? '📁 折叠全部' : '📂 展开全部';
+        function toggleCategory(category) {
+            const section = document.querySelector(`[data-category="${category}"]`);
+            section.classList.toggle('collapsed');
         }
         function toggleTheme() {
             const body = document.body;
-            const btn = document.querySelector('.theme-toggle');
-            
-            body.classList.toggle('dark-theme');
+            const toggle = document.querySelector('.theme-toggle');
             
             if (body.classList.contains('dark-theme')) {
-                btn.textContent = '☀️ 亮色模式';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                btn.textContent = '🌙 深色模式';
+                body.classList.remove('dark-theme');
+                toggle.textContent = '🌙 深色模式';
                 localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-theme');
+                toggle.textContent = '☀️ 浅色模式';
+                localStorage.setItem('theme', 'dark');
             }
         }
         // 页面加载时应用保存的主题
-        window.addEventListener('load', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
-            const btn = document.querySelector('.theme-toggle');
+            const toggle = document.querySelector('.theme-toggle');
             
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-theme');
-                btn.textContent = '☀️ 亮色模式';
+                toggle.textContent = '☀️ 浅色模式';
+            }
+        });
+        // 添加键盘快捷键支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 't' && e.ctrlKey) {
+                e.preventDefault();
+                toggleTheme();
             }
         });
     </script>
