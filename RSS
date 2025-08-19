@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS链接列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .link-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .link-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .link-url {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .visit-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .visit-btn:hover {
+            background: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RSS链接列表</h1>
+            <p class="description">以下列表已移除所有URL中的"/rss"后缀，点击按钮可直接访问对应页面</p>
+        </header>
+        
+        <div class="links-container">
+            <!-- 链接卡片将由JavaScript生成 -->
+        </div>
+        
+        <footer>
+            <p>© 2023 RSS链接列表 | 共包含 <span id="count">0</span> 个链接</p>
+        </footer>
+    </div>
+
+    <script>
+        // 链接数据
+        const links = [
+            { name: "SimbaLee", url: "https://nuku.trabun.org/lipeng0820" },
+            { name: "AI探路者Tim", url: "https://nuku.trabun.org/AIExplorerTim" },
+            { name: "Alexandr Wang", url: "https://nuku.trabun.org/alexandr_wang" },
+            { name: "forecho", url: "https://nuku.trabun.org/caizhenghai" },
+            { name: "Viking", url: "https://nuku.trabun.org/vikingmute" },
+            { name: "郭明錤 (Ming-Chi Kuo)", url: "https://nuku.trabun.org/mingchikuo" },
+            { name: "Y11", url: "https://nuku.trabun.org/seclink" },
+            { name: "Andrew Ng", url: "https://nuku.trabun.org/AndrewYNg" },
+            { name: "枫言枫语播客", url: "https://nuku.trabun.org/fyfyfm" },
+            { name: "九原客", url: "https://nuku.trabun.org/9hills" },
+            { name: "自力 6XStudio", url: "https://nuku.trabun.org/hzlzh" },
+            { name: "阑夕", url: "https://nuku.trabun.org/foxshuo" },
+            { name: "麦田 Rye", url: "https://nuku.trabun.org/maitian99" },
+            { name: "ty~f(x)^AI².Paradigm", url: "https://nuku.trabun.org/TaNGSoFT" },
+            { name: "Jesse Lau 潘一子", url: "https://nuku.trabun.org/jesselaunz" },
+            { name: "Luyu Zhang", url: "https://nuku.trabun.org/goocarlos" },
+            { name: "Justin", url: "https://nuku.trabun.org/interjc" },
+            { name: "sundyme", url: "https://nuku.trabun.org/sundyme" },
+            { name: "ihower", url: "https://nuku.trabun.org/ihower" },
+            { name: "向阳乔木", url: "https://nuku.trabun.org/vista8" },
+            { name: "宝玉", url: "https://nuku.trabun.org/dotey" },
+            { name: "ruanyf", url: "https://nuku.trabun.org/ruanyf" },
+            { name: "Dash", url: "https://nuku.trabun.org/DashHuang" },
+            { name: "Sam Altman", url: "https://nuku.trabun.org/sama" },
+            { name: "穆尼", url: "https://nuku.trabun.org/MooenyChu" },
+            { name: "AppSail.dev", url: "https://nuku.trabun.org/AppSaildotDEV" },
+            { name: "Yangyi", url: "https://nuku.trabun.org/yangyixxxx" },
+            { name: "酱紫表", url: "https://nuku.trabun.org/pengchujin" },
+            { name: "Emily", url: "https://nuku.trabun.org/iamEmily2050" },
+            { name: "JoJo 99AI", url: "https://nuku.trabun.org/99aico" },
+            { name: "ahhhfs", url: "https://nuku.trabun.org/abskoop" },
+            { name: "Cydiar", url: "https://nuku.trabun.org/Cydiar404" },
+            { name: "归藏(guizang.ai)", url: "https://nuku.trabun.org/op7418" },
+            { name: "Gorden Sun", url: "https://nuku.trabun.org/Gorden_Sun" },
+            { name: "Cali Castle", url: "https://nuku.trabun.org/thecalicastle" },
+            { name: "李继刚", url: "https://nuku.trabun.org/lijigang_com" },
+            { name: "luolei", url: "https://nuku.trabun.org/luoleiorg" },
+            { name: "Kai-Fu Lee", url: "https://nuku.trabun.org/kaifulee" },
+            { name: "Elon Musk", url: "https://nuku.trabun.org/elonmusk" },
+            { name: "Hao HONG 洪灏, CFA", url: "https://nuku.trabun.org/HAOHONG_CFA" },
+            { name: "Andrej Karpathy", url: "https://nuku.trabun.org/karpathy" },
+            { name: "Marques Brownlee", url: "https://nuku.trabun.org/MKBHD" },
+            { name: "lidang 立党 (全网劝人卖房、劝人学...", url: "https://nuku.trabun.org/lidangzzz" },
+            { name: "沈万姬", url: "https://nuku.trabun.org/Sexytoxiaoshu" },
+            { name: "副业知识库", url: "https://nuku.trabun.org/chaogewc" },
+            { name: "-Zho-", url: "https://nuku.trabun.org/ZHO_ZHO_ZHO" },
+            { name: "熠辉 Indie", url: "https://nuku.trabun.org/yihui_indie" },
+            { name: "AI产品黄叔", url: "https://nuku.trabun.org/PMbackttfuture" },
+            { name: "老沉", url: "https://nuku.trabun.org/laochenusa" },
+            { name: "iGeekbb", url: "https://nuku.trabun.org/igeekbb" },
+            { name: "Alejo", url: "https://nuku.trabun.org/ecommartinez" },
+            { name: "GitHubDaily", url: "https://nuku.trabun.org/GitHub_Daily" },
+            { name: "God of Prompt", url: "https://nuku.trabun.org/godofprompt" },
+            { name: "Theoretically Media", url: "https://nuku.trabun.org/TheoMediaAI" },
+            { name: "Artificial Intelligence (AI) • ChatGPT", url: "https://nuku.trabun.org/chatgpttricks" },
+            { name: "Berryxia.AI", url: "https://nuku.trabun.org/berryxia_ai" },
+            { name: "路飞 AI 研究员", url: "https://nuku.trabun.org/0xluffy_eth" },
+            { name: "Jason Wei", url: "https://nuku.trabun.org/_jasonwei" },
+            { name: "Owen", url: "https://nuku.trabun.org/OwenYoungZh" },
+            { name: "汗青 HQ", url: "https://nuku.trabun.org/hq4ai" },
+            { name: "Plusye", url: "https://nuku.trabun.org/plusyip" },
+            { name: "张小珺 Xiaojun", url: "https://nuku.trabun.org/zhang_benita" },
+            { name: "Vincent Yang", url: "https://nuku.trabun.org/m1ssuo" },
+            { name: "Big叔の幼稚园", url: "https://nuku.trabun.org/BBYouzhisyuan" },
+            { name: "外汇交易员", url: "https://nuku.trabun.org/myfxtrader" },
+            { name: "Bitturing", url: "https://nuku.trabun.org/Bitturing" },
+            { name: "Shengjia Zhao", url: "https://nuku.trabun.org/shengjia_zhao" },
+            { name: "章工", url: "https://nuku.trabun.org/435hz" },
+            { name: "徐老猫", url: "https://nuku.trabun.org/raycat2021" },
+            { name: "AI Will", url: "https://nuku.trabun.org/FinanceYF5" },
+            { name: "Guangzheng Li", url: "https://nuku.trabun.org/iguangzhengli" },
+            { name: "Javi Lopez", url: "https://nuku.trabun.org/javilopen" },
+            { name: "dynamicwangs", url: "https://nuku.trabun.org/dynamicwangs" },
+            { name: "杀破狼 WolfyXBT", url: "https://nuku.trabun.org/Wolfy_XBT" },
+            { name: "johann.GPT", url: "https://nuku.trabun.org/ProgramerJohann" },
+            { name: "知识分享官", url: "https://nuku.trabun.org/knowledgefxg" },
+            { name: "Prompt Class", url: "https://nuku.trabun.org/PromptClass_io" },
+            { name: "Jackywine", url: "https://nuku.trabun.org/Jackywine" },
+            { name: "老白 (每日干货分享)", url: "https://nuku.trabun.org/laobaishare" }
+        ];
+
+        // 渲染链接卡片
+        const container = document.querySelector('.links-container');
+        const countElement = document.getElementById('count');
+        
+        links.forEach(link => {
+            const card = document.createElement('div');
+            card.className = 'link-card';
+            
+            card.innerHTML = `
+                <div class="link-name">${link.name}</div>
+                <div class="link-url">${link.url}</div>
+                <a href="${link.url}" target="_blank" class="visit-btn">访问链接</a>
+            `;
+            
+            container.appendChild(card);
+        });
+        
+        // 更新链接计数
+        countElement.textContent = links.length;
+    </script>
+</body>
+</html>
